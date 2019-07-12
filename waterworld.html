@@ -248,12 +248,16 @@
 
     function loadAgent() {
       let loadMe = $("#mysterybox").val();
-      let agent = w.agents[0].brain;
+      let agent = w.agents[0];
+      let brain = agent.brain;
       
-      agent.fromJSON(JSON.parse(loadMe)); 
-        agent.epsilon = 0.05;
-        $("#slider").slider('value', agent.epsilon);
-        $("#eps").html(agent.epsilon.toFixed(2));
+      brain.fromJSON(JSON.parse(loadMe)); 
+        brain.epsilon = 0.50;
+        agent.apple = 6000;
+        agent.poison = 3000;
+        agent.crash = 60000;
+        $("#slider").slider('value', brain.epsilon);
+        $("#eps").html(brain.epsilon.toFixed(2));
       alert("finished loading");
 
 
