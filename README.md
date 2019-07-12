@@ -1,12 +1,4 @@
-# REINFORCEjs
-
-**REINFORCEjs** is a Reinforcement Learning library that implements several common RL algorithms, all with web demos. In particular, the library currently includes:
-
-- **Dynamic Programming** methods
-- (Tabular) **Temporal Difference Learning** (SARSA/Q-Learning)
-- **Deep Q-Learning** for Q-Learning with function approximation with Neural Networks
-- **Stochastic/Deterministic Policy Gradients** and Actor Critic architectures for dealing with continuous action spaces. (*very alpha, likely buggy or at the very least finicky and inconsistent*)
-
+# Using ReinforceJS specifically for DQN
 See the [main webpage](http://cs.stanford.edu/people/karpathy/reinforcejs) for many more details, documentation and demos.
 
 # Code Sketch
