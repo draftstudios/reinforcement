@@ -26,6 +26,7 @@ Vec.prototype = {
 }
 
 // line intersection helper function: does line segment (p1,p2) intersect segment (p3,p4) ?
+// mv: basically this guy - https://stackoverflow.com/questions/39578234/segment-intersection-implementation
 var line_intersect = function(p1,p2,p3,p4) {
   var denom = (p4.y-p3.y)*(p2.x-p1.x)-(p4.x-p3.x)*(p2.y-p1.y);
   if(denom===0.0) { return false; } // parallel lines
@@ -33,6 +34,7 @@ var line_intersect = function(p1,p2,p3,p4) {
   var ub = ((p2.x-p1.x)*(p1.y-p3.y)-(p2.y-p1.y)*(p1.x-p3.x))/denom;
   if(ua>0.0&&ua<1.0&&ub>0.0&&ub<1.0) {
     var up = new Vec(p1.x+ua*(p2.x-p1.x), p1.y+ua*(p2.y-p1.y));
+      // what is this?
     return {ua:ua, ub:ub, up:up}; // up is intersection point
   }
   return false;
@@ -113,6 +115,7 @@ var World = function() {
 
 World.prototype = {      
   // helper function to get closest colliding walls/items
+    // these are our whiskers
   stuff_collide_: function(p1, p2, check_walls, check_items) {
     var minres = false;
     
@@ -192,7 +195,7 @@ World.prototype = {
     for(var i=0,n=this.agents.length;i<n;i++) {
       this.agents[i].forward();
     }
-                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                      
+
     // apply outputs of agents on evironment
     for(var i=0,n=this.agents.length;i<n;i++) {
       var a = this.agents[i];
@@ -225,12 +228,6 @@ World.prototype = {
         // wall collision...
       //}
       
-      // handle boundary conditions.. bounce agent
-      if(a.p.x<1) { a.p.x=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.x>this.W-1) { a.p.x=this.W-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.y<1) { a.p.y=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.y>this.H-1) { a.p.y=this.H-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-
       // if(a.p.x<0) { a.p.x= this.W -1; };
       // if(a.p.x>this.W) { a.p.x= 1; }
       // if(a.p.y<0) { a.p.y= this.H -1; };
@@ -242,6 +239,15 @@ World.prototype = {
     for(var j=0,m=this.agents.length;j<m;j++) {
       a.digestion_signal = 0; // important - reset this!
     }
+
+      // handle boundary conditions.. bounce agent
+        // digestion signal doesn't seem to be working fast enough... plz fix
+      if(a.p.x<1) { a.p.x=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+      if(a.p.x>this.W-1) { a.p.x=this.W-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+      if(a.p.y<1) { a.p.y=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+      if(a.p.y>this.H-1) { a.p.y=this.H-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+
+
     for(var i=0,n=this.items.length;i<n;i++) {
       var it = this.items[i];
       it.age += 1;

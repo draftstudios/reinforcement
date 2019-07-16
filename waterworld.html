@@ -253,9 +253,9 @@
       
       brain.fromJSON(JSON.parse(loadMe)); 
         brain.epsilon = 0.50;
-        agent.apple = 6000;
-        agent.poison = 3000;
-        agent.crash = 60000;
+        //agent.apple = 6000;
+        //agent.poison = 3000;
+        //agent.crash = 60000;
         $("#slider").slider('value', brain.epsilon);
         $("#eps").html(brain.epsilon.toFixed(2));
       alert("finished loading");
