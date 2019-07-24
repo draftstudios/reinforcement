@@ -1,9 +1,6 @@
-# Using ReinforceJS specifically for DQN
-See the [main webpage](http://cs.stanford.edu/people/karpathy/reinforcejs) for many more details, documentation and demos.
-
 # Code Sketch
 
-The library exports two global variables: `R`, and `RL`. The former contains various kinds of utilities for building expression graphs (e.g. LSTMs) and performing automatic backpropagation, and is a fork of my other project [recurrentjs](https://github.com/karpathy/recurrentjs). The `RL` object contains the current implementations:
+The library exports two global variables: `R`, and `RL`. The former contains various kinds of utilities for building expression graphs (e.g. LSTMs) and performing automatic backpropagation. The `RL` object contains the current implementations:
 
 - `RL.DPAgent` for finite state/action spaces with environment dynamics
 - `RL.TDAgent` for finite state/action spaces
@@ -26,10 +23,4 @@ setInterval(function(){ // start the learning loop
   //... execute action in environment and get the reward
   agent.learn(reward); // the agent improves its Q,policy,model, etc. reward is a float
 }, 0);
-```
-
-The full documentation and demos are on the [main webpage](http://cs.stanford.edu/people/karpathy/reinforcejs).
-
-# License
-
-MIT.
+``
