@@ -4,7 +4,7 @@
  <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
-  <title>WaterWorld</title>
+  <title>Draft Studios - Reinforcment Learning Example</title>
   <meta name="description" content="">
   <meta name="author" content="">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -38,7 +38,7 @@
   <script src="external/jquery.flot.min.js"></script>
 
   <!-- environment dynamics -->
-  <script src="waterworld.js"></script>
+  <script src="env.js"></script>
 
   <style>
   #wrap {
@@ -259,20 +259,6 @@
         $("#slider").slider('value', brain.epsilon);
         $("#eps").html(brain.epsilon.toFixed(2));
       alert("finished loading");
-
-
-    /*
-      $.getJSON( "agentzoo/wateragent.json", function( data ) {
-        var agent = w.agents[0].brain;
-        agent.fromJSON(data); // corss your fingers...
-        // set epsilon to be much lower for more optimal behavior
-        agent.epsilon = 0.05;
-        $("#slider").slider('value', agent.epsilon);
-        $("#eps").html(agent.epsilon.toFixed(2));
-        // kill learning rate to not learn
-        agent.alpha = 0;
-      });
-      */
     }
 
     var w; // global world object
