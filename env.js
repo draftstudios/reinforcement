@@ -79,7 +79,8 @@ var Item = function(x, y, type) {
   this.p = new Vec(x, y); // position
   this.v = new Vec(Math.random()*5-2.5, Math.random()*5-2.5);
   this.type = type;
-  this.rad = Math.random()*10; // default radius
+  this.rad = 10; // default radius
+    //this.rad = Math.random()*10; // default radius
   this.age = 0;
   this.cleanup_ = false;
 }
