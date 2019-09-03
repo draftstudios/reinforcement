@@ -102,12 +102,12 @@ var World = function() {
   this.walls.pop();
   */
   
-  // set up food and poison
+  // set up alien and asteroid
   this.items = []
   for(var k=0;k<50;k++) {
     var x = randf(20, this.W-20);
     var y = randf(20, this.H-20);
-    var t = randi(1, 3); // food or poison (1 and 2)
+    var t = randi(1, 3); // alien or asteroid (1 and 2)
     var it = new Item(x, y, t);
     this.items.push(it);
   }
@@ -264,12 +264,12 @@ World.prototype = {
           if(!rescheck) { 
             // ding! nom nom nom
             if(it.type === 1) {
-                a.digestion_signal += 1.0; // mmm delicious apple
-                a.apple++;
+                a.digestion_signal += 1.0; // mmm delicious alien
+                a.alien++;
             }
             if(it.type === 2) {
-                a.digestion_signal += -1.0; // ewww poison
-                a.poison++;
+                a.digestion_signal += -1.0; // ewww asteroid
+                a.asteroid++;
             }
             it.cleanup_ = true;
             update_items = true;
@@ -303,7 +303,7 @@ World.prototype = {
     if(this.items.length < 50 && this.clock % 10 === 0 && randf(0,1)<0.25) {
       var newitx = randf(20, this.W-20);
       var newity = randf(20, this.H-20);
-      var newitt = randi(1, 3); // food or poison (1 and 2)
+      var newitt = randi(1, 3); // alien or asteroid (1 and 2)
       var newit = new Item(newitx, newity, newitt);
       this.items.push(newit);
     }
@@ -318,8 +318,8 @@ World.prototype = {
 // Eye sensor has a maximum range and senses walls
 var Eye = function(angle) {
   this.angle = angle; // angle relative to agent its on
-  this.max_range = 120;
-  this.sensed_proximity = 120; // what the eye is seeing. will be set in world.tick()
+  this.max_range = 200;
+  this.sensed_proximity = 200; // what the eye is seeing. will be set in world.tick()
   this.sensed_type = -1; // what does the eye see?
   this.vx = 0; // sensed velocity
   this.vy = 0;
@@ -354,8 +354,8 @@ var Agent = function() {
   // outputs on world
   this.action = 0;
 
-    this.apple = 0;
-    this.poison = 0;
+    this.alien = 0;
+    this.asteroid = 0;
     this.crash = 0;
   
   this.prevactionix = -1;
@@ -382,7 +382,7 @@ Agent.prototype = {
       input_array[i*5+3] = e.vx; // velocity information of the sensed target
       input_array[i*5+4] = e.vy;
       if(e.sensed_type !== -1) {
-        // sensed_type is 0 for wall, 1 for food and 2 for poison.
+        // sensed_type is 0 for wall, 1 for alien and 2 for asteroid.
         // lets do a 1-of-k encoding into the input array
         input_array[i*5 + e.sensed_type] = e.sensed_proximity/e.max_range; // normalize to [0,1]
       }
