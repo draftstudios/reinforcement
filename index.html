@@ -352,11 +352,11 @@
     }
 
     function updateStats() {
-      var stats = "<ul>";
+        var stats = "<span style='font-size:1.25em;'><span style='color:red;'>Point of the game is to crash into the aliens and avoid asteroids! Leave the browser window open and it'll improve!</span><br/>";
       for(var i=0; i<w.agents.length; i++) {
-        stats += "<li>Player " + (i+1) + ": " + w.agents[i].alien + " aliens, " + w.agents[i].asteroid + " asteroids, " + w.agents[i].crash + " crashes</li>";
+        stats += w.agents[i].alien + " aliens, " + w.agents[i].asteroid + " asteroids, " + w.agents[i].crash + " crashes";
       }
-      stats += "</ul>";
+          stats += "</span>";
       $("#apples_and_poison").html(stats);
     }
     
@@ -395,7 +395,7 @@ spec.num_hidden_units = 100 // number of neurons in hidden layer
 
    <div id="brain_info_div"></div>
 
-   <div id="apples_and_poison" style="color:white;position:absolute;"></div>
+   <div id="apples_and_poison" style="color:white;position:absolute;bottom:0;"></div>
 
 <br>
 <span style="display:none;">
