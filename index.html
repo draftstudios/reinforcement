@@ -279,7 +279,7 @@
       let brain = agent.brain;
       
       brain.fromJSON(JSON.parse(loadMe)); 
-        brain.epsilon = 0.20;
+        brain.epsilon = 0.40;
         $("#slider").slider('value', brain.epsilon);
         $("#eps").html(brain.epsilon.toFixed(2));
 
