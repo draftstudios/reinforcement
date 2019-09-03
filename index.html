@@ -383,12 +383,12 @@ spec.tderror_clamp = 1.0; // for robustness
 spec.num_hidden_units = 100 // number of neurons in hidden layer
 </textarea>
 
-<div style="text-align:center; display:none;">
-    <button class="btn btn-danger" onclick="resetAgent()" style="width:150px;height:50px;margin-bottom:5px;">Reinit agent</button>
-    <button class="btn btn-success" onclick="goveryfast()" style="width:150px;height:50px;margin-bottom:5px;">Go very fast</button>
-    <button class="btn btn-success" onclick="gofast()" style="width:150px;height:50px;margin-bottom:5px;">Go fast</button>
-    <button class="btn btn-success" onclick="gonormal()" style="width:150px;height:50px;margin-bottom:5px;">Go normal</button>
-    <button class="btn btn-success" onclick="goslow()" style="width:150px;height:50px;margin-bottom:5px;">Go slow</button>
+<div style="text-align:center; position:fixed; top: 0; z-index: 9999;">
+    <button class="btn btn-sm btn-danger" onclick="resetAgent()">Make stupid</button>
+    <button class="btn btn-sm btn-warning" onclick="loadAgent()">Make smarter</button>
+    <button class="btn btn-sm btn-success" onclick="gofast()">Go fast</button>
+    <button class="btn btn-sm btn-success" onclick="gonormal()">Go normal</button>
+    <button class="btn btn-sm btn-success" onclick="goslow()">Go slow</button>
 </div>
 
 <canvas id="canvas" style="position:absolute;"></canvas>
