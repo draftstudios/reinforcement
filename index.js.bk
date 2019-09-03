@@ -26,7 +26,6 @@ Vec.prototype = {
 }
 
 // line intersection helper function: does line segment (p1,p2) intersect segment (p3,p4) ?
-// mv: basically this guy - https://stackoverflow.com/questions/39578234/segment-intersection-implementation
 var line_intersect = function(p1,p2,p3,p4) {
   var denom = (p4.y-p3.y)*(p2.x-p1.x)-(p4.x-p3.x)*(p2.y-p1.y);
   if(denom===0.0) { return false; } // parallel lines
@@ -34,7 +33,6 @@ var line_intersect = function(p1,p2,p3,p4) {
   var ub = ((p2.x-p1.x)*(p1.y-p3.y)-(p2.y-p1.y)*(p1.x-p3.x))/denom;
   if(ua>0.0&&ua<1.0&&ub>0.0&&ub<1.0) {
     var up = new Vec(p1.x+ua*(p2.x-p1.x), p1.y+ua*(p2.y-p1.y));
-      // what is this?
     return {ua:ua, ub:ub, up:up}; // up is intersection point
   }
   return false;
@@ -79,7 +77,7 @@ var Item = function(x, y, type) {
   this.p = new Vec(x, y); // position
   this.v = new Vec(Math.random()*5-2.5, Math.random()*5-2.5);
   this.type = type;
-  this.rad = Math.random()*10; // default radius
+  this.rad = 10; // default radius
   this.age = 0;
   this.cleanup_ = false;
 }
@@ -115,7 +113,6 @@ var World = function() {
 
 World.prototype = {      
   // helper function to get closest colliding walls/items
-    // these are our whiskers
   stuff_collide_: function(p1, p2, check_walls, check_items) {
     var minres = false;
     
@@ -170,7 +167,7 @@ World.prototype = {
         // we have a line from p to p->eyep
         var eyep = new Vec(a.p.x + e.max_range * Math.sin(a.angle + e.angle),
                            a.p.y + e.max_range * Math.cos(a.angle + e.angle));
-        var res = this.stuff_collide_(a.p, eyep, true, true);
+        var res = this.stuff_collide_(a.p, eyep, true, false);
         if(res) {
           // eye collided with wall
           e.sensed_proximity = res.up.dist_from(a.p);
@@ -199,7 +196,6 @@ World.prototype = {
     // apply outputs of agents on evironment
     for(var i=0,n=this.agents.length;i<n;i++) {
       var a = this.agents[i];
-      a.digestion_signal += 0.1; // reward over a tick for playing
       a.op = a.p; // back up old position
       a.oangle = a.angle; // and angle
       
@@ -228,6 +224,7 @@ World.prototype = {
         // wall collision...
       //}
       
+
       // if(a.p.x<0) { a.p.x= this.W -1; };
       // if(a.p.x>this.W) { a.p.x= 1; }
       // if(a.p.y<0) { a.p.y= this.H -1; };
@@ -237,16 +234,15 @@ World.prototype = {
     // tick all items
     var update_items = false;
     for(var j=0,m=this.agents.length;j<m;j++) {
+      var a = this.agents[j];
       a.digestion_signal = 0; // important - reset this!
     }
 
-      // handle boundary conditions.. bounce agent
-        // digestion signal doesn't seem to be working fast enough... plz fix
-      if(a.p.x<1) { a.p.x=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.x>this.W-1) { a.p.x=this.W-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.y<1) { a.p.y=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.y>this.H-1) { a.p.y=this.H-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-
+    // handle boundary conditions.. bounce agent
+    if(a.p.x<1) { a.p.x=1; a.v.x=0; a.v.y=0; a.digestion_signal += -1.0; a.crash++;}
+    if(a.p.x>this.W-1) { a.p.x=this.W-1; a.v.x=0; a.v.y=0; a.digestion_signal += -1.0; a.crash++;}
+    if(a.p.y<1) { a.p.y=1; a.v.x=0; a.v.y=0; a.digestion_signal += -1.0; a.crash++;}
+    if(a.p.y>this.H-1) { a.p.y=this.H-1; a.v.x=0; a.v.y=0; a.digestion_signal += -1.0; a.crash++;}
 
     for(var i=0,n=this.items.length;i<n;i++) {
       var it = this.items[i];
@@ -255,6 +251,7 @@ World.prototype = {
       // see if some agent gets lunch
       for(var j=0,m=this.agents.length;j<m;j++) {
         var a = this.agents[j];
+
         var d = a.p.dist_from(it.p);
         if(d < it.rad + a.rad) {
           
@@ -263,13 +260,14 @@ World.prototype = {
           var rescheck = false;
           if(!rescheck) { 
             // ding! nom nom nom
+            
             if(it.type === 1) {
-                a.digestion_signal += 1.0; // mmm delicious apple
-                a.apple++;
+              a.digestion_signal += 1.0; // mmm delicious apple
+              a.apples++;
             }
             if(it.type === 2) {
-                a.digestion_signal += -1.0; // ewww poison
-                a.poison++;
+              a.digestion_signal += -1.0; // ewww poison
+              a.poison++;
             }
             it.cleanup_ = true;
             update_items = true;
@@ -278,11 +276,9 @@ World.prototype = {
         }
       }
         
-      // move the items
+      // move the items and item bouncing
       it.p.x += it.v.x;
       it.p.y += it.v.y;
-
-      // behavior of item bouncing off walls
       if(it.p.x < 1) { it.p.x = 1; it.v.x *= -1; }
       if(it.p.x > this.W-1) { it.p.x = this.W-1; it.v.x *= -1; }
       if(it.p.y < 1) { it.p.y = 1; it.v.y *= -1; }
@@ -353,12 +349,12 @@ var Agent = function() {
   this.reward_bonus = 0.0;
   this.digestion_signal = 0.0;
   
+  this.apples = 0;
+  this.poison = 0;
+  this.crash = 0;
+
   // outputs on world
   this.action = 0;
-
-    this.apple = 0;
-    this.poison = 0;
-    this.crash = 0;
   
   this.prevactionix = -1;
   this.num_states = this.eyes.length * 5 + 2;

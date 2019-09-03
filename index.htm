@@ -56,6 +56,13 @@
     border: 1px solid black;
   }
   </style>
+
+
+  <div style="display:none;">
+  <img id="source"
+       src="https://mdn.mozillademos.org/files/5397/rhino.jpg"
+       width="300" height="227">
+</div>
   
   <script type="application/javascript">
     var canvas, ctx;
@@ -89,6 +96,10 @@
         ctx.arc(a.op.x, a.op.y, a.rad, 0, Math.PI*2, true); 
         ctx.fill();
         ctx.stroke();
+        
+        const image = document.getElementById('source');
+
+        ctx.drawImage(image, a.op.x, a.op.y);
         
         // draw agents sight
         for(var ei=0,ne=a.eyes.length;ei<ne;ei++) {

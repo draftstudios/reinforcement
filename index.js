@@ -79,7 +79,7 @@ var Item = function(x, y, type) {
   this.p = new Vec(x, y); // position
   this.v = new Vec(Math.random()*5-2.5, Math.random()*5-2.5);
   this.type = type;
-  this.rad = Math.random()*10; // default radius
+  this.rad = 20; // default radius //UNCOMMENTCHANGE TO 10
   this.age = 0;
   this.cleanup_ = false;
 }
@@ -281,8 +281,6 @@ World.prototype = {
       // move the items
       it.p.x += it.v.x;
       it.p.y += it.v.y;
-
-      // behavior of item bouncing off walls
       if(it.p.x < 1) { it.p.x = 1; it.v.x *= -1; }
       if(it.p.x > this.W-1) { it.p.x = this.W-1; it.v.x *= -1; }
       if(it.p.y < 1) { it.p.y = 1; it.v.y *= -1; }
@@ -344,7 +342,7 @@ var Agent = function() {
   this.actions.push(3);
   
   // properties
-  this.rad = 10;
+  this.rad = 45;
   this.eyes = [];
   for(var k=0;k<30;k++) { this.eyes.push(new Eye(k*0.21)); }
   
