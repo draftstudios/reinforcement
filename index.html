@@ -107,7 +107,6 @@
         // ctx.stroke();
         var background = new Image();
         background.src = "assets/spaceship1.png"; //UNCOMMENT TO GET SPACESHIP
-        ctx.drawImage(background, a.op.x-25, a.op.y-36.2); 
         
         // draw agents sight
         for(var ei=0,ne=a.eyes.length;ei<ne;ei++) {
@@ -129,6 +128,7 @@
           ctx.stroke();
         }
       }
+        ctx.drawImage(background, a.op.x-25, a.op.y-36.2); 
       
       // draw items
       ctx.strokeStyle = "rgba(0,0,0,0)";
