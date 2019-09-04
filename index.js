@@ -342,7 +342,7 @@ var Agent = function() {
   this.actions.push(3);
   
   // properties
-  this.rad = 45;
+  this.rad = 35;
   this.eyes = [];
   for(var k=0;k<30;k++) { this.eyes.push(new Eye(k*0.21)); }
   

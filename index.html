@@ -114,17 +114,18 @@
           var e = a.eyes[ei];
           var sr = e.sensed_proximity;
           if(e.sensed_type === -1) { 
-            ctx.strokeStyle = "rgba(200,200,200,1)"; // wall or nothing
+            ctx.strokeStyle = "rgba(0,0,0,0.5)"; // nothing
           }
           if(e.sensed_type === 0) { 
-            ctx.strokeStyle = "rgba(255,0,255,1)"; // wall or nothing
+            ctx.strokeStyle = "rgba(255,0,255,1)"; // wall
           }
-          if(e.sensed_type === 1) { ctx.strokeStyle = "rgba(255,150,150, 1)"; } // aliens
-          if(e.sensed_type === 2) { ctx.strokeStyle = "rgb(150,255,150, 1)"; } // asteroids
+          if(e.sensed_type === 1) { ctx.strokeStyle = "rgba(0,255,150, 1)"; } // aliens
+          if(e.sensed_type === 2) { ctx.strokeStyle = "rgb(255,255,255, 1)"; } // asteroids
           ctx.beginPath();
           ctx.moveTo(a.op.x, a.op.y);
           ctx.lineTo(a.op.x + sr * Math.sin(a.oangle + e.angle),
                      a.op.y + sr * Math.cos(a.oangle + e.angle));
+          ctx.lineWidth = 2;
           ctx.stroke();
         }
       }
