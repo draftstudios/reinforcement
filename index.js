@@ -199,7 +199,7 @@ World.prototype = {
     // apply outputs of agents on evironment
     for(var i=0,n=this.agents.length;i<n;i++) {
       var a = this.agents[i];
-      a.digestion_signal += 0.1; // reward over a tick for playing
+      a.digestion_signal += -0.1; // reward over a tick for playing
       a.op = a.p; // back up old position
       a.oangle = a.angle; // and angle
       
