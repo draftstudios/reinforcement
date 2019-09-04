@@ -79,6 +79,19 @@
     function draw() {  
       ctx.clearRect(0, 0, window.innerWidth, window.innerHeight);
       ctx.lineWidth = 1;
+
+
+        var logo = new Image();
+        logo.src = "assets/Minh-Icon.png";
+        ctx.globalAlpha = 0.2;
+        ctx.drawImage(logo, -100, 50); 
+
+        var logo = new Image();
+        logo.src = "assets/Jimmy-Icon.png";
+        ctx.drawImage(logo, window.innerWidth-500, 50); 
+
+        ctx.globalAlpha = 1;
+
       var agents = w.agents;
       
       // draw walls in environment
@@ -383,6 +396,8 @@ spec.learning_steps_per_iteration = 5;
 spec.tderror_clamp = 1.0; // for robustness
 spec.num_hidden_units = 100 // number of neurons in hidden layer
 </textarea>
+
+<img height="300" src="assets/draftlogo.jpg" style="position:fixed;">
 
 <div style="text-align:center; position:fixed; top: 0; z-index: 9999;">
     <button class="btn btn-sm btn-danger" onclick="resetAgent()">Make stupid</button>
