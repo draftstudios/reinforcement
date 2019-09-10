@@ -110,8 +110,8 @@
         ctx.arc(a.op.x, a.op.y, a.rad, 0, Math.PI*2, true); 
         //ctx.fill();
         //ctx.stroke();
-        var background = new Image();
-        background.src = "assets/Pacman.png"; //UNCOMMENT TO GET SPACESHIP
+        var pacman = new Image();
+        pacman.src = "assets/Pacman.png"; //UNCOMMENT TO GET SPACESHIP
         
         // draw agents sight
         for(var ei=0,ne=a.eyes.length;ei<ne;ei++) {
@@ -133,26 +133,33 @@
           ctx.stroke();
         }
       }
-        ctx.drawImage(background, a.op.x-35, a.op.y-35); 
+        ctx.drawImage(pacman, a.op.x-35, a.op.y-35); 
       
       // draw items
+
       ctx.strokeStyle = "rgba(0,0,0,0)";
         var alienImage = new Image();
         alienImage.src = "assets/Cherry.png";
-
         var poisonImage = new Image();
         poisonImage.src = "assets/Ghost.png";
+
       for(var i=0,n=w.items.length;i<n;i++) {
         var it = w.items[i];
         if(it.type === 1) {
-          ctx.drawImage(alienImage, it.p.x-18, it.p.y-25);
+          //ctx.fillStyle = "rgb(0, 255, 150)"; 
+          ctx.drawImage(alienImage, it.p.x-20, it.p.y-20);        
         }
         // if(it.type === 2) ctx.fillStyle = "rgb(255, 255, 150)";
         if(it.type === 2){
-
-          ctx.drawImage(poisonImage, it.p.x-26, it.p.y-24);
+          //ctx.fillStyle = "rgb(255, 255, 150)"; 
+          ctx.drawImage(poisonImage, it.p.x-20, it.p.y-20);
 
         } 
+
+        //ctx.beginPath();
+        //ctx.arc(it.p.x, it.p.y, it.rad, 0, Math.PI*2, true); 
+        //ctx.fill();
+        //ctx.stroke();
       }
     }
 
@@ -359,7 +366,7 @@
     }
 
     function updateStats() {
-        var stats = "<span style='font-size:1.25em;'><span style='color:red;'>Point of the game is to crash into the cherries and avoid ghosts! Leave the browser window open and it'll improve!</span><br/>";
+        var stats = "<span style='font-size:1.25em;'><span style='color:red;'>Point of the game is eat the cherries and avoid ghosts! Leave the browser window open and it'll improve!</span><br/>";
       for(var i=0; i<w.agents.length; i++) {
         stats += w.agents[i].alien + " cherries, " + w.agents[i].asteroid + " ghosts, " + w.agents[i].crash + " crashes";
       }
