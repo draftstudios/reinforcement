@@ -81,14 +81,6 @@
       ctx.lineWidth = 1;
 
 
-        var logo = new Image();
-        logo.src = "assets/Minh-Icon.png";
-        ctx.globalAlpha = 0.05;
-        ctx.drawImage(logo, -100, 50); 
-
-        var logo = new Image();
-        logo.src = "assets/Jimmy-Icon.png";
-        ctx.drawImage(logo, window.innerWidth-500, 50); 
 
         ctx.globalAlpha = 1;
 
@@ -114,12 +106,12 @@
         var a = agents[i];
         
         // draw agents body
-        //  ctx.beginPath();
+        ctx.beginPath();
         ctx.arc(a.op.x, a.op.y, a.rad, 0, Math.PI*2, true); 
-        // ctx.fill();
-        // ctx.stroke();
+        ctx.fill();
+        ctx.stroke();
         var background = new Image();
-        background.src = "assets/spaceship1.png"; //UNCOMMENT TO GET SPACESHIP
+        background.src = "assets/Pacman.png"; //UNCOMMENT TO GET SPACESHIP
         
         // draw agents sight
         for(var ei=0,ne=a.eyes.length;ei<ne;ei++) {
@@ -146,10 +138,10 @@
       // draw items
       ctx.strokeStyle = "rgba(0,0,0,0)";
         var alienImage = new Image();
-        alienImage.src = "assets/alien.png";
+        alienImage.src = "assets/Cherry.png";
 
         var poisonImage = new Image();
-        poisonImage.src = "assets/asteroid1.png";
+        poisonImage.src = "assets/Ghost.png";
       for(var i=0,n=w.items.length;i<n;i++) {
         var it = w.items[i];
         if(it.type === 1) {
@@ -279,6 +271,7 @@
       var brain = w.agents[0].brain;
       $("#mysterybox").fadeIn();
       $("#mysterybox").val(JSON.stringify(brain.toJSON()));
+      console.log(JSON.stringify(brain.toJSON()));
     }
     
     function resetAgent() {
@@ -402,6 +395,7 @@ spec.num_hidden_units = 100 // number of neurons in hidden layer
 <div style="text-align:center; position:fixed; top: 0; z-index: 9999;">
     <button class="btn btn-sm btn-danger" onclick="resetAgent()">Make stupid</button>
     <button class="btn btn-sm btn-warning" onclick="loadAgent()">Make smartish</button>
+    <button class="btn btn-sm btn-success" onclick="goveryfast()">Go very fast</button>
     <button class="btn btn-sm btn-success" onclick="gofast()">Go fast</button>
     <button class="btn btn-sm btn-success" onclick="gonormal()">Go normal</button>
     <button class="btn btn-sm btn-success" onclick="goslow()">Go slow</button>
