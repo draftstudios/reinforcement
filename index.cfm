@@ -1,3 +1,4 @@
+<!--- 
 <cfscript>
 
     R = {};
@@ -168,5 +169,18 @@
 
     writeOutput(yoo.toJSON());
     
+
+</cfscript>
+--->
+
+<cfscript>
+obj = new lib.cfreinforce();    
+obj.out("123");    
+obj.assert(true,"233");
+writeDump(obj.Mat(2,2));
+test = obj.Mat(5,5);
+test2 = obj.copyMat(test);
+writedump(test2);
+writedump(test);
 
 </cfscript>
