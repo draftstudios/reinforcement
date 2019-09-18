@@ -33,14 +33,14 @@ component name="mat" displayname="mat" output="false" {
           // slow but careful accessor function
           // we want row-major order
           var ix = (this.d * row) + col;
-          assert(ix >= 0 && ix < this.w.length);
+          assert(ix > 0 && ix <= this.w.length);
           return this.w[ix];
         }
 
         this.set = function(row, col, v) {
           // slow but careful accessor function
           var ix = (this.d * row) + col;
-          assert(ix >= 0 && ix < this.w.length);
+          assert(ix > 0 && ix <= this.w.length);
           this.w[ix] = v; 
         }
 
@@ -73,7 +73,7 @@ component name="mat" displayname="mat" output="false" {
           this.w = zeros(this.n * this.d);
           this.dw = zeros(this.n * this.d);
           var n = this.n * this.d;
-          for(var i=0;i<n;i++) {
+          for(var i=1;i<=n;i++) {
             this.w[i] = obj_json.w[i]; // copy over weights
           }
         }
