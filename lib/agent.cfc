@@ -41,7 +41,6 @@ component name="agent" displayname="agent" output="true" {
 
     if (isdefined("this.brain.act")) this.action = this.brain.act(input_array);
 
-
     if (this.action eq 1) this.digestion_signal += 1.0;
     if (this.action eq 2) this.digestion_signal += -1.0;
     if (this.action eq 3) this.digestion_signal += -1.0;
