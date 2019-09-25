@@ -199,7 +199,6 @@ World.prototype = {
     // apply outputs of agents on evironment
     for(var i=0,n=this.agents.length;i<n;i++) {
       var a = this.agents[i];
-      a.digestion_signal += -0.1; // reward over a tick for playing
       a.op = a.p; // back up old position
       a.oangle = a.angle; // and angle
       
@@ -239,6 +238,8 @@ World.prototype = {
     for(var j=0,m=this.agents.length;j<m;j++) {
       a.digestion_signal = 0; // important - reset this!
     }
+
+      a.digestion_signal += -0.1; // reward over a tick for playing
 
       // handle boundary conditions.. bounce agent
         // digestion signal doesn't seem to be working fast enough... plz fix
