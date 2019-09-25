@@ -388,47 +388,33 @@ Agent.prototype = {
         input_array[i*5 + e.sensed_type] = e.sensed_proximity/e.max_range; // normalize to [0,1]
       }
     }
-    // proprioception and orientation
     input_array[ne+0] = this.v.x;
     input_array[ne+1] = this.v.y;
 
     this.action = this.brain.act(input_array);
-    //var action = this.actions[actionix];
-    // demultiplex into behavior variables
-    //this.action = action;
   },
   backward: function() {
     var reward = this.digestion_signal;
-
-    // var proximity_reward = 0.0;
-    // var num_eyes = this.eyes.length;
-    // for(var i=0;i<num_eyes;i++) {
-    //   var e = this.eyes[i];
-    //   // agents dont like to see walls, especially up close
-    //   proximity_reward += e.sensed_type === 0 ? e.sensed_proximity/e.max_range : 1.0;
-    // }
-    // proximity_reward = proximity_reward/num_eyes;
-    // reward += proximity_reward;
-
-    //var forward_reward = 0.0;
-    //if(this.actionix === 0) forward_reward = 1;
-
     this.last_reward = reward; // for vis
     this.brain.learn(reward);
   }
 }
 
-let objArr = [
-  [{name: 'A1', imageUrl: 'https://picsum.photos/id/300/400/400'}, 
-  {name: 'A2', imageUrl: 'https://picsum.photos/id/301/400/400'}, 
-  {name: 'A3', imageUrl:'https://picsum.photos/id/302/400/400'}],
-  [{name: 'B1', imageUrl: 'https://picsum.photos/id/200/400/400'}, 
-  {name: 'B2', imageUrl: 'https://picsum.photos/id/201/400/400'}, 
-  {name: 'B3', imageUrl:'https://picsum.photos/id/202/400/400'}],
-  [{name: 'C1', imageUrl: 'https://picsum.photos/id/100/400/400'}, 
-  {name: 'C2', imageUrl: 'https://picsum.photos/id/101/400/400'}, 
-  {name: 'C3', imageUrl:'https://picsum.photos/id/102/400/400'}],
-  [{name: 'D1', imageUrl: 'https://picsum.photos/id/400/400/400'}, 
-  {name: 'D2', imageUrl: 'https://picsum.photos/id/401/400/400'}, 
-  {name: 'D3', imageUrl:'https://picsum.photos/id/402/400/400'}]
-];
+//VIJAY TESTING
+cp = Combinatorics.cartesianProduct(
+  [
+{name: 'A1', imageUrl: 'https://picsum.photos/id/300/400/400'}, 
+{name: 'A2', imageUrl: 'https://picsum.photos/id/301/400/400'}, 
+{name: 'A3', imageUrl:'https://picsum.photos/id/302/400/400'}],
+[{name: 'B1', imageUrl: 'https://picsum.photos/id/200/400/400'}, 
+{name: 'B2', imageUrl: 'https://picsum.photos/id/201/400/400'}, 
+{name: 'B3', imageUrl:'https://picsum.photos/id/202/400/400'}],
+[{name: 'C1', imageUrl: 'https://picsum.photos/id/100/400/400'}, 
+{name: 'C2', imageUrl: 'https://picsum.photos/id/101/400/400'}, 
+{name: 'C3', imageUrl:'https://picsum.photos/id/102/400/400'}],
+[{name: 'D1', imageUrl: 'https://picsum.photos/id/400/400/400'}, 
+{name: 'D2', imageUrl: 'https://picsum.photos/id/401/400/400'}, 
+{name: 'D3', imageUrl:'https://picsum.photos/id/402/400/400'}]);
+
+const combinedArray = cp.toArray();
+console.log(combinedArray);
