@@ -37,7 +37,12 @@ if (isdefined("server.a.last_reward")) {
 }
 
 server.a.resetreward();
-server.a.forward(1);
+if (isdefined("url.gender")) {
+    server.a.forward(url.gender);
+}
+else {
+    server.a.forward(2);
+}
 //server.a.forcereward(1);
 //server.a.forcereward(1);
 //server.a.forcereward(-1);
@@ -54,5 +59,13 @@ server.a.forward(1);
 //server.a.backward();
 //writeDump(server.a);
 //writeDump(server.a.brain.toJSON());
+
+
+    writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:absolute; top: 0; right: 0;" value="RESET EVERYTHING">');
+    if (isdefined("url.gender") and url.gender eq 1) {
+        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=2'';" style="position:absolute; top: 0; right: 200;" value="MALE">');
+    } else {
+        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=1'';" style="position:absolute; top: 0; right: 200;" value="FEMALE">');
+    }
 
 </cfscript>

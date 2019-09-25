@@ -3,13 +3,18 @@ component name="agent" displayname="agent" output="true" {
         // positional information
         this.p = 0;
         this.op = this.p; // old position
+
+        this.fullarrays = [[{color:"blue"},{color:"yellow"},{color:"pink"}],[{color:"green"},{color:"yellow"},{color:"gray"}],[{color:"yellow"},{color:"pink"},{color:"black"},{color:"violet"}],[{color:"violet"},{color:"black"},{color:"gray"},{color:"magenta"}]];
+
+        this.actions = arrayCartesianProduct(this.fullarrays);
         
+        /*
         this.actions = [
             [
                 {position:1, color:"blue"},
                 {position:2, color:"green"},
                 {position:3, color:"yellow"},
-                {position:4, color:"blueviolet"}
+                {position:4, color:"violet"}
             ],
             [
                 {position:1, color:"yellow"},
@@ -26,7 +31,7 @@ component name="agent" displayname="agent" output="true" {
             [
                 {position:1, color:"pink"},
                 {position:2, color:"yellow"},
-                {position:3, color:"blueviolet"},
+                {position:3, color:"violet"},
                 {position:4, color:"magenta"}
             ],
             [
@@ -36,6 +41,7 @@ component name="agent" displayname="agent" output="true" {
                 {position:4, color:"magenta"}
             ]
         ];
+        */
         
         this.brain = "";// set from outside
 
@@ -48,10 +54,44 @@ component name="agent" displayname="agent" output="true" {
         this.prevactionix = -1;
         this.num_states = ArrayLen(this.actions);
     }
+
+    public array function arrayCartesianProduct(required array arrays) {
+        var result = [];
+        var arraysLen = arrayLen(arguments.arrays);
+        var size = (arraysLen) ? 1 : 0;
+        var array = '';
+        var x = 0;
+        var i = 0;
+        var j = 0;
+        var current = [];
+
+        for (x=1; x <= arraysLen; x++) {
+            size = size * arrayLen(arguments.arrays[x]);
+            current[x] = 1;
+        }
+        for (i=1; i <= size; i++) {
+            result[i] = [];
+            for (j=1; j <= arraysLen; j++) {
+                arrayAppend(result[i], arguments.arrays[j][current[j]]);
+            }
+            for (j=arraysLen; j > 0; j--) {
+                if (arrayLen(arguments.arrays[j]) > current[j])  {
+                    current[j]++;
+                    break;
+                }
+                else {
+                    current[j] = 1;
+                }
+            }
+        }
+
+        return result;
+    }
   
   public function getNumStates() {
     return this.num_states;
   }
+
   public function getMaxNumActions() {
     return ArrayLen(this.actions);
   }
@@ -68,7 +108,7 @@ component name="agent" displayname="agent" output="true" {
         //if (this.p eq 2) c = 1.0;
         //if (this.p eq 3) d = 1.0;
     
-    var input_array = [gender];
+    var input_array = [gender]; //what is observed?
 
     if (isdefined("this.brain.act")) this.action = this.brain.act(input_array);
 
@@ -95,7 +135,6 @@ component name="agent" displayname="agent" output="true" {
   writeOutput('</script>');
 
     writeOutput('<body style="margin:0; padding:0">');
-    writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:absolute; top: 0; right: 0;" value="RESET EVERYTHING">');
     for (var i=1; i<=ArrayLen(this.actions[this.action]); i++){
         //writeDump(this.actions[this.action][i].color);
         //writeDump(this.actions[this.action][i].position);
@@ -110,7 +149,7 @@ component name="agent" displayname="agent" output="true" {
                 writeOutput('<div style="background-color:#this.actions[this.action][i].color#; height:400px;"><a href="javascript:forcereward(-1);" style="background-color:white;">Click Me</a></div>');
             }
         } else {
-            if (listcontainsnocase("yellow,pink,magenta,blueviolet", this.actions[this.action][i].color)) 
+            if (listcontainsnocase("yellow,pink,magenta,violet", this.actions[this.action][i].color)) 
             {
                 writeOutput('<div style="background-color:#this.actions[this.action][i].color#; height:400px;"><a href="javascript:forcereward(1);" style="background-color:white;">Click Me</a></div>');
             }
