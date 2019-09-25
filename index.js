@@ -199,7 +199,6 @@ World.prototype = {
     // apply outputs of agents on evironment
     for(var i=0,n=this.agents.length;i<n;i++) {
       var a = this.agents[i];
-      a.digestion_signal += -0.1; // reward over a tick for playing
       a.op = a.p; // back up old position
       a.oangle = a.angle; // and angle
       
@@ -239,6 +238,8 @@ World.prototype = {
     for(var j=0,m=this.agents.length;j<m;j++) {
       a.digestion_signal = 0; // important - reset this!
     }
+
+      a.digestion_signal += -0.1; // reward over a tick for playing
 
       // handle boundary conditions.. bounce agent
         // digestion signal doesn't seem to be working fast enough... plz fix
@@ -416,3 +417,18 @@ Agent.prototype = {
     this.brain.learn(reward);
   }
 }
+
+let objArr = [
+  [{name: 'A1', imageUrl: 'https://picsum.photos/id/300/400/400'}, 
+  {name: 'A2', imageUrl: 'https://picsum.photos/id/301/400/400'}, 
+  {name: 'A3', imageUrl:'https://picsum.photos/id/302/400/400'}],
+  [{name: 'B1', imageUrl: 'https://picsum.photos/id/200/400/400'}, 
+  {name: 'B2', imageUrl: 'https://picsum.photos/id/201/400/400'}, 
+  {name: 'B3', imageUrl:'https://picsum.photos/id/202/400/400'}],
+  [{name: 'C1', imageUrl: 'https://picsum.photos/id/100/400/400'}, 
+  {name: 'C2', imageUrl: 'https://picsum.photos/id/101/400/400'}, 
+  {name: 'C3', imageUrl:'https://picsum.photos/id/102/400/400'}],
+  [{name: 'D1', imageUrl: 'https://picsum.photos/id/400/400/400'}, 
+  {name: 'D2', imageUrl: 'https://picsum.photos/id/401/400/400'}, 
+  {name: 'D3', imageUrl:'https://picsum.photos/id/402/400/400'}]
+];

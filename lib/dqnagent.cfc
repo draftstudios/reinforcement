@@ -43,6 +43,7 @@ public function getopt(opt, field_name, default_value) {
         this.nh = this.num_hidden_units; // number of hidden units
         this.ns = this.env.getNumStates();
         this.na = this.env.getMaxNumActions();
+        //writedump(this.na);
 
         // nets are hardcoded for now as key (str) -> Mat
         // not proud of this. better solution is to have a whole Net object
