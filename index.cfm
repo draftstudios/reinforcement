@@ -26,12 +26,16 @@ if (!isdefined("server.a")) {
 if (!isdefined("server.env")) {
   server.env = server.a;
 }
-if (!isdefined("server.a.brain") or  IsSimpleValue(server.a.brain)) {
+if (!isdefined("server.a.brain") or IsSimpleValue(server.a.brain)) {
   server.a.brain = server.obj.DQNAgent(server.env, server.spec);
 }
 //writedump(server.a.brain);
 
     //server.a.brain.reset();
+if (isdefined("server.a.last_reward")) {
+    writeoutput("Last Reward: #server.a.last_reward#");
+}
+
 server.a.resetreward();
 server.a.forward(1);
 //server.a.forcereward(1);
