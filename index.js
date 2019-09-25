@@ -403,18 +403,44 @@ Agent.prototype = {
 //VIJAY TESTING
 cp = Combinatorics.cartesianProduct(
   [
-{name: 'A1', imageUrl: 'https://picsum.photos/id/300/400/400'}, 
-{name: 'A2', imageUrl: 'https://picsum.photos/id/301/400/400'}, 
-{name: 'A3', imageUrl:'https://picsum.photos/id/302/400/400'}],
-[{name: 'B1', imageUrl: 'https://picsum.photos/id/200/400/400'}, 
-{name: 'B2', imageUrl: 'https://picsum.photos/id/201/400/400'}, 
-{name: 'B3', imageUrl:'https://picsum.photos/id/202/400/400'}],
-[{name: 'C1', imageUrl: 'https://picsum.photos/id/100/400/400'}, 
-{name: 'C2', imageUrl: 'https://picsum.photos/id/101/400/400'}, 
-{name: 'C3', imageUrl:'https://picsum.photos/id/102/400/400'}],
-[{name: 'D1', imageUrl: 'https://picsum.photos/id/400/400/400'}, 
-{name: 'D2', imageUrl: 'https://picsum.photos/id/401/400/400'}, 
-{name: 'D3', imageUrl:'https://picsum.photos/id/402/400/400'}]);
+{name: 'A1', imageUrl: 'A1.png'}, 
+{name: 'A2', imageUrl: 'A2.png'}, 
+{name: 'A3', imageUrl:'A3.png'},
+{name: 'A4', imageUrl:'A4.png'},
+{name: 'A5', imageUrl:'A5.png'},
+{name: 'A6', imageUrl:'A6.png'},
+{name: 'A7', imageUrl:'A7.png'},
+{name: 'A8', imageUrl:'A8.png'},
+{name: 'A9', imageUrl: 'A9.png'}
+],
+[{name: 'B1', imageUrl: 'B1.png'}, 
+{name: 'B2', imageUrl: 'B2.png'}, 
+{name: 'B3', imageUrl:'B3.png'},
+{name: 'B4', imageUrl: 'B4.png'}],
+[{name: 'C1', imageUrl: 'C1.png'},
+{name: 'C2', imageUrl: 'C2.png'},
+{name: 'C3', imageUrl: 'C3.png'},
+{name: 'C4', imageUrl: 'C4.png'}
+],
+[
+{name: 'D1', imageUrl: 'D1.png'},
+{name: 'D2', imageUrl: 'D2.png'},
+{name: 'D3', imageUrl: 'D3.png'},
+{name: 'D4', imageUrl: 'D4.png'}
+],
+[
+  {name: 'E1', imageUrl:'E1.png'},
+  {name: 'E2', imageUrl: 'E2.png'},
+  {name: 'E3', imageUrl: 'E3.png'},
+],
+[{name: 'F1', imageUrl:'F1.png'}],
+[
+{name: 'G1', imageUrl: 'G1.png'}
+],
+[{name: 'H1', imageUrl:'H1.png'}]
+);
+
 
 const combinedArray = cp.toArray();
-console.log(combinedArray);
+let myJSON = JSON.stringify(combinedArray);
+console.log(myJSON);
