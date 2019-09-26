@@ -63,11 +63,12 @@ else {
 //writeDump(server.a.brain.toJSON());
 
 
-    writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:absolute; top: 4px; right: 4px; position: fixed;" value="RESET EVERYTHING">');
+    writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:fixed; top: 4px; right: 4px;" value="RESET EVERYTHING">');
+
     if (isdefined("url.gender") and url.gender eq 1) {
-        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=2'';" style="position:absolute; top: 4px; right: 200; position: fixed;" value="MALE">');
+        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=2'';" style="position:fixed; top: 4px; right: 200;" value="MALE">');
     } else {
-        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=1'';" style="position:absolute; top: 4px; right: 200; position: fixed;" value="FEMALE">');
+        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=1'';" style="position:fixed; top: 4px; right: 200;" value="FEMALE">');
     }
 
 </cfscript>

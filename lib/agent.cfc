@@ -158,6 +158,8 @@ component name="agent" displayname="agent" output="true" {
   writeOutput('');
   writeOutput('});');
   writeOutput('</script>');
+  writeOutput('<style>');
+  writeOutput('</style>');
 
     writeOutput('<body style="margin:0; padding:0; background-color: grey">');
     for (var i=1; i<=ArrayLen(this.actions[this.action]); i++){
@@ -166,18 +168,18 @@ component name="agent" displayname="agent" output="true" {
 
         if (gender eq 1) { //if male lets put preference to darker colors
    
-                writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: white; background-color:##3b5998; opacity:1;"><img src="./Components/thumbsup.png"/> Like</a></div>');
+                writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(1);" style="margin: 5px; display:inline-block;border-radius: 4px; padding: 4px 10px; text-decoration: none; border: 1px solid white; color: white; background-color:##3b5998; opacity:1;"><img src="./Components/thumbsup.png"/> Like</a></div>');
           
         } else {
             
-                 writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(-1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: white; background-color:##3b5998; opacity:1;"><img src="./Components/thumbsup.png"/> Like</a></div>');   
+                 writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(-1);" style="margin: 5px; display:inline-block;border-radius: 4px; padding: 4px 10px; text-decoration: none; border: 1px solid white; color: white; background-color:##3b5998; opacity:1;"><img src="./Components/thumbsup.png"/> Like</a></div>');   
         }
     }
 
   writeOutput('<script>');
    writeOutput('var gender = #gender#;');
-    writeOutput('let rewardPoints= {"A1":{f:1, m:-1},"A2":{f:1, m:0},"A3":{f:-1, m:-1},"A4":{f:1, m: 2},"A5":{f:1, m:4},"A6":{f:2, m:1},"A7":{f:1, m:4},"A8":{f:2, m:4 },"A9":{f:-2, m:-5},"B1":{f:-3, m:-4},"B2":{f:-1, m:-2},"B3":{f:5, m:-1},"B4":{f:3, m:2},"C1":{f:3, m:2},"C2":{f:3, m:1},"C3":{f:2, m:1},"C4":{f:3, m:1},"D1":{f:1, m:4},"D2":{f:0, m:0},"D3":{f:3, m:1},"D4":{f:4, m:5},"E1":{f:3, m:5},"E2":{f:1, m:2},"F1":{f:2, m:6},"G1":{f:2,m:3},"H1":{f:2, m:3}};');
-    writeOutput('let arr = ["A1","A2","A3","A4","A5","A6","A7","A8","A9","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4","E1","E2","F1","G1","H1" ];');
+    writeOutput('var rewardPoints= {"A1":{f:1, m:-1},"A2":{f:1, m:0},"A3":{f:-1, m:-1},"A4":{f:1, m: 2},"A5":{f:1, m:4},"A6":{f:2, m:1},"A7":{f:1, m:4},"A8":{f:2, m:4 },"A9":{f:-2, m:-5},"B1":{f:-3, m:-4},"B2":{f:-1, m:-2},"B3":{f:5, m:-1},"B4":{f:3, m:2},"C1":{f:3, m:2},"C2":{f:3, m:1},"C3":{f:2, m:1},"C4":{f:3, m:1},"D1":{f:1, m:4},"D2":{f:0, m:0},"D3":{f:3, m:1},"D4":{f:4, m:5},"E1":{f:3, m:5},"E2":{f:1, m:2},"F1":{f:2, m:6},"G1":{f:2,m:3},"H1":{f:2, m:3}};');
+    writeOutput('var arr = ["A1","A2","A3","A4","A5","A6","A7","A8","A9","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4","E1","E2","F1","G1","H1" ];');
     writeOutput('femalePoints =[];malePoints =[];');
     writeOutput('setInterval(()=>{');
     writeOutput('let copyArr=[];');
