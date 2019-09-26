@@ -3,7 +3,7 @@ param url.gender = 1;
 server.spec = {}
 server.spec.update = 'qlearn'; // qlearn | sarsa
 server.spec.gamma = 0.9; // discount factor, [0, 1)
-server.spec.epsilon = 0.2; // initial epsilon for epsilon-greedy policy, [0, 1)
+server.spec.epsilon = 0.05; // initial epsilon for epsilon-greedy policy, [0, 1)
 server.spec.alpha = 0.005; // value function learning rate
 server.spec.experience_add_every = 5; // number of time steps before we add another experience to replay memory
 server.spec.experience_size = 5000; // size of experience
@@ -38,12 +38,7 @@ if (isdefined("server.a.last_reward")) {
 }
 
 server.a.resetreward();
-if (isdefined("url.gender")) {
-    server.a.forward(url.gender);
-}
-else {
-    server.a.forward(2);
-}
+server.a.forward(url.gender);
 
 //server.a.forcereward(1);
 //server.a.forcereward(1);
@@ -109,7 +104,7 @@ else {
 
 
     writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:absolute; top: 0; right: 0;" value="RESET EVERYTHING">');
-    if (isdefined("url.gender") and url.gender eq 1) {
+    if (url.gender eq 1) {
         writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=2'';" style="position:absolute; top: 0; right: 200;" value="MALE">');
     } else {
         writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=1'';" style="position:absolute; top: 0; right: 200;" value="FEMALE">');
