@@ -80,6 +80,7 @@ public function getopt(opt, field_name, default_value) {
 
     public function fromJSON(i) {
         j = DeserializeJSON(i);
+        // writeDump(j);
         // load function
         this.nh = j.nh;
         this.ns = j.ns;
@@ -137,8 +138,6 @@ public function getopt(opt, field_name, default_value) {
 
         // sample some additional experience from replay memory and learn from it
         for(var k=0;k<this.learning_steps_per_iteration;k++) {
-            //var ri = randi(0, ArrayLen(this.exp)); // todo: priority sweeps?
-            //minh
             var ri = randi(1, ArrayLen(this.exp)+1); // todo: priority sweeps?
             var e = this.exp[ri];
             this.learnFromTuple(e[1], e[2], e[3], e[4], e[5])
