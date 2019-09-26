@@ -187,25 +187,9 @@ component name="agent" displayname="agent" output="true" {
     writeOutput('      }');
     writeOutput(' }');
     writeOutput('console.log(copyArr);');
-    writeOutput('for (var key in rewardPoints) {if (rewardPoints.hasOwnProperty(key)) {for (let i = 0; i < copyArr.length; i++) {if (copyArr[i] === key) {for (let keyy in rewardPoints[copyArr[i]]) {if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {  console.log(key + " --> " + keyy + "= " + rewardPoints[copyArr[i]][keyy]);}}}}}}');
-    
-    // writeOutput('for (var key in rewardPoints) {');
-    // writeOutput('if (rewardPoints.hasOwnProperty(key)) {');
-    // writeOutput('for (let i = 0; i < copyArr.length; i++) {');
-    // writeOutput('if(copyArr[i]===key){');
-    // writeOutput('for(let keyy in rewardPoints[copyArr[i]]){');
-    // writeOutput('if(rewardPoints[copyArr[i]].hasOwnProperty(keyy))');
-    // writeOutput('{');
-    // writeOutput('console.log(key +'' --> '' +keyy + ''= ''+rewardPoints[copyArr[i]][keyy]);');
-    // writeOutput('}');
-    // writeOutput('}');
-    // writeOutput('}');
-    // writeOutput('}');
-    // writeOutput('}');
-    // writeOutput('}');
-    // writeOutput('console.log(#this.actions[this.action][i].name#);');
+    writeOutput('for (var key in rewardPoints) {if (rewardPoints.hasOwnProperty(key)) {for (let i = 0; i < copyArr.length; i++) {if (copyArr[i] === key) {for (let keyy in rewardPoints[copyArr[i]]) {if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {if(gender ==2){keyy = ''f'';console.log(''Female Point: ''+ rewardPoints[copyArr[i]][keyy]);femalePoints.push(rewardPoints[copyArr[i]][keyy]);}else{keyy = ''m'';console.log(''Male Point: ''+ rewardPoints[copyArr[i]][keyy]);malePoints.push(rewardPoints[copyArr[i]][keyy]);}}}}}}}');
     writeOutput('},2000);');
-    writeOutput("setInterval(()=>{let totalFemalePoints;let totalMalePoints;if(femalePoints !=[]){totalFemalePoints = femalePoints.reduce((a,b)=>a+b, 0);forcereward(totalFemalePoints);}if(malePoints !=[]){totalMalePoints = malePoints.reduce((a,b)=> a+b, 0);forcereward(totalMalePoints);}console.log('Female Points:'+totalFemalePoints);console.log('Maile Points: '+ totalMalePoints);femalePoints =[];malePoints =[];},5000);")
+    writeOutput('setInterval(()=>{let totalFemalePoints;let totalMalePoints;if(femalePoints !=[] || femalePoints ==0 || femalePoints ==undefined){totalFemalePoints = femalePoints.reduce((a,b)=>a+b, 0);forcereward(totalFemalePoints);}if(malePoints !=[] || malePoints ==0 || malePoints == undefined){totalMalePoints = malePoints.reduce((a,b)=> a+b, 0);forcereward(totalMalePoints);}console.log(''Female Pointsssss:''+totalFemalePoints);console.log(''Male Pointsssss: ''+ totalMalePoints);femalePoints =[];malePoints =[];},5000);');
   //   // LOOP THROUGH CLASS NAMES AND FIND REWARD VALUE FOR EACH, ADD THEM TOGETHER, THEN CALL FORCEFORWARD(VAL) ie: javascript:forcereward(-1);
     writeOutput('</script>');
     writeOutput('</body>');

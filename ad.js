@@ -130,37 +130,37 @@ $(document).ready(function() {
     //   }
     // }
     // console.log(copyArr);
-    for (var key in rewardPoints) {
-      if (rewardPoints.hasOwnProperty(key)) {
-        for (let i = 0; i < copyArr.length; i++) {
-          if (copyArr[i] === key) {
-            for (let keyy in rewardPoints[copyArr[i]]) {
-              if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {
-                // forcereward(rewardPoints[copyArr[i]][keyy]);
-                // console.log(
-                //   key + " --> " + keyy + "= " + rewardPoints[copyArr[i]][keyy]
-                // );
-                if(gender ==2){
-                  keyy = 'f';
+    /*
+    // for (var key in rewardPoints) {
+    //   if (rewardPoints.hasOwnProperty(key)) {
+    //     for (let i = 0; i < copyArr.length; i++) {
+    //       if (copyArr[i] === key) {
+    //         for (let keyy in rewardPoints[copyArr[i]]) {
+    //           if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {
+    //             // forcereward(rewardPoints[copyArr[i]][keyy]);
+    //             // console.log(
+    //             //   key + " --> " + keyy + "= " + rewardPoints[copyArr[i]][keyy]
+    //             // );
+    //             if(gender ==2){
+    //               keyy = 'f';
 
-                  console.log('Female Point: '+ rewardPoints[copyArr[i]][keyy]);
-                  femalePoints.push(rewardPoints[copyArr[i]][keyy]);
-                }else{
-                  keyy = 'm';
-                  console.log('Male Point: '+ rewardPoints[copyArr[i]][keyy]);
-                  malePoints.push(rewardPoints[copyArr[i]][keyy]);
-                }
+    //               console.log('Female Point: '+ rewardPoints[copyArr[i]][keyy]);
+    //               femalePoints.push(rewardPoints[copyArr[i]][keyy]);
+    //             }else{
+    //               keyy = 'm';
+    //               console.log('Male Point: '+ rewardPoints[copyArr[i]][keyy]);
+    //               malePoints.push(rewardPoints[copyArr[i]][keyy]);
+    //             }
+    //           }
+    //         }
+    //       }
+    //     }
+    //   }
+    // }
+    */
+   for (var key in rewardPoints) {if (rewardPoints.hasOwnProperty(key)) {for (let i = 0; i < copyArr.length; i++) {if (copyArr[i] === key) {for (let keyy in rewardPoints[copyArr[i]]) {if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {if(gender ==2){keyy = 'f';console.log('Female Point: '+ rewardPoints[copyArr[i]][keyy]);femalePoints.push(rewardPoints[copyArr[i]][keyy]);}else{keyy = 'm';console.log('Male Point: '+ rewardPoints[copyArr[i]][keyy]);malePoints.push(rewardPoints[copyArr[i]][keyy]);}}}}}}}
 
-                // if(gender =1){
-                //   // console.log('Male Point: '+)
-                //   console.log('Male');
-                // }
-              }
-            }
-          }
-        }
-      }
-    }
+    // for (var key in rewardPoints) {if (rewardPoints.hasOwnProperty(key)) {for (let i = 0; i < copyArr.length; i++) {if (copyArr[i] === key) {for (let keyy in rewardPoints[copyArr[i]]) {if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {  console.log(key + " --> " + keyy + "= " + rewardPoints[copyArr[i]][keyy]);}}}}}}
 //forcereward(rewardPoints[copyArr[i]][keyy]);
     // }
     // console.log(tempArr)
@@ -174,13 +174,13 @@ $(document).ready(function() {
     let totalFemalePoints;
     let totalMalePoints;
     //add points
-  if(femalePoints !=[]){
+  if(femalePoints !=[] || femalePoints ==0 || femalePoints ==undefined){
     totalFemalePoints = femalePoints.reduce((a,b)=>a+b, 0);
-    forcereward(totalFemalePoints);
+    // forcereward(totalFemalePoints);
   }
-  if(malePoints !=[]){
+  else if(malePoints !=[] || malePoints ==0 || malePoints == undefined){
     totalMalePoints = malePoints.reduce((a,b)=> a+b, 0);
-    forcereward(totalMalePoints);
+    // forcereward(totalMalePoints);
   }
     console.log('Female Points:'+totalFemalePoints);
     console.log('Maile Points: '+ totalMalePoints);
@@ -189,7 +189,7 @@ $(document).ready(function() {
 
   },5000);
 
-  // setInterval(()=>{let totalFemalePoints;let totalMalePoints;if(femalePoints !=[]){totalFemalePoints = femalePoints.reduce((a,b)=>a+b, 0);forcereward(totalFemalePoints);}if(malePoints !=[]){totalMalePoints = malePoints.reduce((a,b)=> a+b, 0);forcereward(totalMalePoints);}console.log('Female Points:'+totalFemalePoints);console.log('Maile Points: '+ totalMalePoints);femalePoints =[];malePoints =[];},5000);
+  // setInterval(()=>{let totalFemalePoints;let totalMalePoints;if(femalePoints !=[] || femalePoints ==0 || femalePoints ==undefined){totalFemalePoints = femalePoints.reduce((a,b)=>a+b, 0);forcereward(totalFemalePoints);}if(malePoints !=[] || malePoints ==0 || malePoints == undefined){totalMalePoints = malePoints.reduce((a,b)=> a+b, 0);forcereward(totalMalePoints);}console.log('Female Points:'+totalFemalePoints);console.log('Maile Points: '+ totalMalePoints);femalePoints =[];malePoints =[];},5000);
 
 
 
