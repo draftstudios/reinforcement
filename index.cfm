@@ -8,7 +8,7 @@ server.spec.experience_add_every = 5; // number of time steps before we add anot
 server.spec.experience_size = 10000; // size of experience
 server.spec.learning_steps_per_iteration = 5;
 server.spec.tderror_clamp = 1.0; // for robustness
-server.spec.num_hidden_units = 100; // number of neurons in hidden layer
+server.spec.num_hidden_units = 16; // number of neurons in hidden layer
 
 if (!isdefined("server.obj"))
 {
@@ -33,7 +33,9 @@ if (!isdefined("server.a.brain") or IsSimpleValue(server.a.brain)) {
 
     //server.a.brain.reset();
 if (isdefined("server.a.last_reward")) {
+    writeOutput('<div style="position: fixed; color: red; font-weight:bold; left: 200px">')
     writeoutput("Last Reward: #server.a.last_reward#");
+    writeOutput("</div>")
 }
 
 server.a.resetreward();
@@ -61,11 +63,11 @@ else {
 //writeDump(server.a.brain.toJSON());
 
 
-    writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:absolute; top: 0; right: 0;" value="RESET EVERYTHING">');
+    writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:absolute; top: 4px; right: 4px; position: fixed;" value="RESET EVERYTHING">');
     if (isdefined("url.gender") and url.gender eq 1) {
-        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=2'';" style="position:absolute; top: 0; right: 200;" value="MALE">');
+        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=2'';" style="position:absolute; top: 4px; right: 200; position: fixed;" value="MALE">');
     } else {
-        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=1'';" style="position:absolute; top: 0; right: 200;" value="FEMALE">');
+        writeOutput('<input type="button" onclick="javascript:location.href=''index.cfm?gender=1'';" style="position:absolute; top: 4px; right: 200; position: fixed;" value="FEMALE">');
     }
 
 </cfscript>

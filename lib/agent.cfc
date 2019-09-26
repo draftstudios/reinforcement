@@ -86,7 +86,7 @@ component name="agent" displayname="agent" output="true" {
         this.action = 0;
         
         this.prevactionix = -1;
-        this.num_states = ArrayLen(this.actions);
+        this.num_states = 2;
     }
 
     public array function arrayCartesianProduct(required array arrays) {
@@ -169,24 +169,26 @@ component name="agent" displayname="agent" output="true" {
   writeOutput('});');
   writeOutput('</script>');
 
-    writeOutput('<body style="margin:0; padding:0">');
+    writeOutput('<body style="margin:0; padding:0; background-color: grey">');
     for (var i=1; i<=ArrayLen(this.actions[this.action]); i++){
         //writeDump(this.actions[this.action][i].color);
         //writeDump(this.actions[this.action][i].position);
 
         if (gender eq 1) { //if male lets put preference to darker colors
    
-                writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover;"><a href="javascript:forcereward(1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black;">Click Me</a></div>');
+                writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black;">Click Me</a></div>');
           
         } else {
             
-                writeOutput('<div style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover;"><a href="javascript:forcereward(-1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black;">Click Me</a></div>');    
+                 writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(-1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black;">Click Me</a></div>');   
         }
     }
 
   writeOutput('<script>');
+   writeOutput('var gender = #gender#;');
     writeOutput('let rewardPoints= {"A1":{f:1, m:-1},"A2":{f:1, m:0},"A3":{f:-1, m:-1},"A4":{f:1, m: 2},"A5":{f:1, m:4},"A6":{f:2, m:1},"A7":{f:1, m:4},"A8":{f:2, m:4 },"A9":{f:-2, m:-5},"B1":{f:-3, m:-4},"B2":{f:-1, m:-2},"B3":{f:5, m:-1},"B4":{f:3, m:2},"C1":{f:3, m:2},"C2":{f:3, m:1},"C3":{f:2, m:1},"C4":{f:3, m:1},"D1":{f:1, m:4},"D2":{f:0, m:0},"D3":{f:3, m:1},"D4":{f:4, m:5},"E1":{f:3, m:5},"E2":{f:1, m:2},"F1":{f:2, m:6},"G1":{f:2,m:3},"H1":{f:2, m:3}};');
     writeOutput('let arr = ["A1","A2","A3","A4","A5","A6","A7","A8","A9","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4","E1","E2","F1","G1","H1" ];');
+    writeOutput('femalePoints =[];malePoints =[];');
     writeOutput('setInterval(()=>{');
     writeOutput('let copyArr=[];');
     writeOutput('  for(let i = 0; i < arr.length;i++){');
@@ -195,24 +197,26 @@ component name="agent" displayname="agent" output="true" {
     writeOutput('      }');
     writeOutput(' }');
     writeOutput('console.log(copyArr);');
+    writeOutput('for (var key in rewardPoints) {if (rewardPoints.hasOwnProperty(key)) {for (let i = 0; i < copyArr.length; i++) {if (copyArr[i] === key) {for (let keyy in rewardPoints[copyArr[i]]) {if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {  console.log(key + " --> " + keyy + "= " + rewardPoints[copyArr[i]][keyy]);}}}}}}');
     
-    writeOutput('for (var key in rewardPoints) {');
-    writeOutput('if (rewardPoints.hasOwnProperty(key)) {');
-    writeOutput('for (let i = 0; i < copyArr.length; i++) {');
-    writeOutput('if(copyArr[i]===key){');
-    writeOutput('for(let keyy in rewardPoints[copyArr[i]]){');
-    writeOutput('if(rewardPoints[copyArr[i]].hasOwnProperty(keyy))');
-    writeOutput('{');
-    writeOutput('console.log(key +'' --> '' +keyy + ''= ''+rewardPoints[copyArr[i]][keyy]);');
-    writeOutput('}');
-    writeOutput('}');
-    writeOutput('}');
-    writeOutput('}');
-    writeOutput('}');
-    writeOutput('}');
-
+    // writeOutput('for (var key in rewardPoints) {');
+    // writeOutput('if (rewardPoints.hasOwnProperty(key)) {');
+    // writeOutput('for (let i = 0; i < copyArr.length; i++) {');
+    // writeOutput('if(copyArr[i]===key){');
+    // writeOutput('for(let keyy in rewardPoints[copyArr[i]]){');
+    // writeOutput('if(rewardPoints[copyArr[i]].hasOwnProperty(keyy))');
+    // writeOutput('{');
+    // writeOutput('console.log(key +'' --> '' +keyy + ''= ''+rewardPoints[copyArr[i]][keyy]);');
+    // writeOutput('}');
+    // writeOutput('}');
+    // writeOutput('}');
+    // writeOutput('}');
+    // writeOutput('}');
+    // writeOutput('}');
+    // writeOutput('console.log(#this.actions[this.action][i].name#);');
     writeOutput('},2000);');
-    // LOOP THROUGH CLASS NAMES AND FIND REWARD VALUE FOR EACH, ADD THEM TOGETHER, THEN CALL FORCEFORWARD(VAL) ie: javascript:forcereward(-1);
+    writeOutput('setInterval(()=>{let totalFemalePoints;let totalMalePoints;if(femalePoints !=[]){totalFemalePoints = femalePoints.reduce((a,b)=>a+b, 0);forcereward(totalFemalePoints);}if(malePoints !=[]){totalMalePoints = malePoints.reduce((a,b)=> a+b, 0);forcereward(totalMalePoints);}console.log('Female Points:'+totalFemalePoints);console.log('Maile Points: '+ totalMalePoints);femalePoints =[];malePoints =[];},5000);')
+  //   // LOOP THROUGH CLASS NAMES AND FIND REWARD VALUE FOR EACH, ADD THEM TOGETHER, THEN CALL FORCEFORWARD(VAL) ie: javascript:forcereward(-1);
     writeOutput('</script>');
     writeOutput('</body>');
 
