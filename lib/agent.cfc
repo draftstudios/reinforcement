@@ -155,7 +155,7 @@ component name="agent" displayname="agent" output="true" {
     //writeDump(this.actions[this.action]);
 
 
-    writeOutput('<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'); 
+    writeOutput('<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script><script src="./jquery-visible-master/jquery.visible.js"></script>'); 
 
   writeOutput('<script>');
   writeOutput('$(function() {');
@@ -165,6 +165,7 @@ component name="agent" displayname="agent" output="true" {
   writeOutput('    reseteverything = () => {');
   writeOutput('      $.get("utils.cfc?method=reseteverything");');
   writeOutput('    };');
+  writeOutput('');
   writeOutput('});');
   writeOutput('</script>');
 
@@ -175,13 +176,44 @@ component name="agent" displayname="agent" output="true" {
 
         if (gender eq 1) { //if male lets put preference to darker colors
    
-                writeOutput('<div style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover;"><a href="javascript:forcereward(1);">Click Me</a></div>');
+                writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover;"><a href="javascript:forcereward(1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black;">Click Me</a></div>');
           
         } else {
             
-                writeOutput('<div style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover;"><a href="javascript:forcereward(-1);">Click Me</a></div>');    
+                writeOutput('<div style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover;"><a href="javascript:forcereward(-1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black;">Click Me</a></div>');    
         }
     }
+
+  writeOutput('<script>');
+    writeOutput('let rewardPoints= {"A1":{f:1, m:-1},"A2":{f:1, m:0},"A3":{f:-1, m:-1},"A4":{f:1, m: 2},"A5":{f:1, m:4},"A6":{f:2, m:1},"A7":{f:1, m:4},"A8":{f:2, m:4 },"A9":{f:-2, m:-5},"B1":{f:-3, m:-4},"B2":{f:-1, m:-2},"B3":{f:5, m:-1},"B4":{f:3, m:2},"C1":{f:3, m:2},"C2":{f:3, m:1},"C3":{f:2, m:1},"C4":{f:3, m:1},"D1":{f:1, m:4},"D2":{f:0, m:0},"D3":{f:3, m:1},"D4":{f:4, m:5},"E1":{f:3, m:5},"E2":{f:1, m:2},"F1":{f:2, m:6},"G1":{f:2,m:3},"H1":{f:2, m:3}};');
+    writeOutput('let arr = ["A1","A2","A3","A4","A5","A6","A7","A8","A9","B1","B2","B3","B4","C1","C2","C3","C4","D1","D2","D3","D4","E1","E2","F1","G1","H1" ];');
+    writeOutput('setInterval(()=>{');
+    writeOutput('let copyArr=[];');
+    writeOutput('  for(let i = 0; i < arr.length;i++){');
+    writeOutput('      if($(''.''+arr[i]).visible()){');
+    writeOutput('          copyArr.push(arr[i]);');
+    writeOutput('      }');
+    writeOutput(' }');
+    writeOutput('console.log(copyArr);');
+    
+    writeOutput('for (var key in rewardPoints) {');
+    writeOutput('if (rewardPoints.hasOwnProperty(key)) {');
+    writeOutput('for (let i = 0; i < copyArr.length; i++) {');
+    writeOutput('if(copyArr[i]===key){');
+    writeOutput('for(let keyy in rewardPoints[copyArr[i]]){');
+    writeOutput('if(rewardPoints[copyArr[i]].hasOwnProperty(keyy))');
+    writeOutput('{');
+    writeOutput('console.log(key +'' --> '' +keyy + ''= ''+rewardPoints[copyArr[i]][keyy]);');
+    writeOutput('}');
+    writeOutput('}');
+    writeOutput('}');
+    writeOutput('}');
+    writeOutput('}');
+    writeOutput('}');
+
+    writeOutput('},2000);');
+    // LOOP THROUGH CLASS NAMES AND FIND REWARD VALUE FOR EACH, ADD THEM TOGETHER, THEN CALL FORCEFORWARD(VAL) ie: javascript:forcereward(-1);
+    writeOutput('</script>');
     writeOutput('</body>');
 
   }
