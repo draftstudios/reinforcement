@@ -166,11 +166,11 @@ component name="agent" displayname="agent" output="true" {
 
         if (gender eq 1) { //if male lets put preference to darker colors
    
-                writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: white; background-color:##3b5998; opacity:1;"><img src="./Components/thumbsup.png"/> Like</a></div>');
+                writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black; background-color:##3b5998; opacity:1;"><img src="./Components/thumbsup.png"/> Like</a></div>');
           
         } else {
             
-                 writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(-1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: white; background-color:##3b5998; opacity:1;"><img src="./Components/thumbsup.png"/> Like</a></div>');   
+                 writeOutput('<div class="#this.actions[this.action][i].name#" style="background-image:url(''#this.actions[this.action][i].imageUrl#''); height: 400px; background-size: cover; margin: 4px 0 4px 0;"><a href="javascript:forcereward(-1);" style="padding: 4px; text-decoration: none; border: 1px solid black; color: black; background-color:##3b5998;"><img src="./Components/thumbsup.png"/> Like</a></div>');   
         }
     }
 
