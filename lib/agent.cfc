@@ -114,6 +114,52 @@ component name="agent" displayname="agent" output="true" {
     //writeOutput('my action:');
     //writeDump(this.actions[this.action]);
 
+  //is this the most legible place to put this code? in agent.cfc?
+
+  writeOutput('<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'); 
+
+  writeOutput('<script>');
+  writeOutput('$(function() {');
+  writeOutput('    forcereward = (amount) => {');
+  writeOutput('      $.get("utils.cfc?method=forcereward&amount=" + amount);');
+  writeOutput('    };');
+  writeOutput('    reseteverything = () => {');
+  writeOutput('      $.get("utils.cfc?method=reseteverything");');
+  writeOutput('    };');
+  writeOutput('    loadbrain = () => {');
+  writeOutput('      $(''a'').click();');
+  writeOutput('    };');
+  writeOutput('    clickandgo= () => {');
+  writeOutput('      $(''a'').click();');
+  writeOutput('    };');
+  writeOutput('});');
+  writeOutput('</script>');
+
+    writeOutput('<body style="margin:0; padding:0">');
+    for (i=1; i<=ArrayLen(this.actions[this.action]); i++){
+
+        if (gender eq 1) { //if male lets put preference to darker colors
+            if (listcontainsnocase("dodgerblue,green,gray,black", this.actions[this.action][i].color)) 
+            {
+                writeOutput('<div style="background-color:#this.actions[this.action][i].color#; height:400px;"><a href="javascript:forcereward(1);" style="background-color:white;">Click Me</a></div>');
+            }
+            else 
+            {
+                writeOutput('<div style="background-color:#this.actions[this.action][i].color#; height:400px;"><a href="javascript:forcereward(-1);" style="background-color:white;">Click Me</a></div>');
+            }
+        } else {
+            if (listcontainsnocase("yellow,pink,magenta,violet", this.actions[this.action][i].color)) 
+            {
+                writeOutput('<div style="background-color:#this.actions[this.action][i].color#; height:400px;"><a href="javascript:forcereward(1);" style="background-color:white;">Click Me</a></div>');
+            }
+            else 
+            {
+                writeOutput('<div style="background-color:#this.actions[this.action][i].color#; height:400px;"><a href="javascript:forcereward(-1);" style="background-color:white;">Click Me</a></div>');
+            }
+        }
+    }
+    writeOutput('</body>');
+
 
   }
 
@@ -121,7 +167,7 @@ component name="agent" displayname="agent" output="true" {
     this.digestion_signal += amount;
   }
 
-  public function resetreward(amount) {
+  public function resetreward() {
     this.digestion_signal = 0;
   }
 

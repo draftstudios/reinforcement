@@ -3,11 +3,11 @@ param url.gender = 1;
 server.spec = {}
 server.spec.update = 'qlearn'; // qlearn | sarsa
 server.spec.gamma = 0.9; // discount factor, [0, 1)
-server.spec.epsilon = 0.05; // initial epsilon for epsilon-greedy policy, [0, 1)
+server.spec.epsilon = 0.2; // initial epsilon for epsilon-greedy policy, [0, 1)
 server.spec.alpha = 0.005; // value function learning rate
-server.spec.experience_add_every = 5; // number of time steps before we add another experience to replay memory
+server.spec.experience_add_every = 1; // number of time steps before we add another experience to replay memory
 server.spec.experience_size = 5000; // size of experience
-server.spec.learning_steps_per_iteration = 5;
+server.spec.learning_steps_per_iteration = 1;
 server.spec.tderror_clamp = 1.0; // for robustness
 server.spec.num_hidden_units = 16; // number of neurons in hidden layer
 
@@ -57,50 +57,6 @@ server.a.forward(url.gender);
 //writeDump(server.a);
 //writeDump(server.a.brain.toJSON());
 
-  //is this the most legible place to put this code? in agent.cfc?
-  writeOutput('<script src="https://code.jquery.com/jquery-3.4.1.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>'); 
-
-  writeOutput('<script>');
-  writeOutput('$(function() {');
-  writeOutput('    forcereward = (amount) => {');
-  writeOutput('      $.get("utils.cfc?method=forcereward&amount=" + amount);');
-  writeOutput('    };');
-  writeOutput('    reseteverything = () => {');
-  writeOutput('      $.get("utils.cfc?method=reseteverything");');
-  writeOutput('    };');
-  writeOutput('    loadbrain = () => {');
-  writeOutput('      $(''a'').click();');
-  writeOutput('    };');
-  writeOutput('    clickandgo= () => {');
-  writeOutput('      $(''a'').click();');
-  writeOutput('    };');
-  writeOutput('});');
-  writeOutput('</script>');
-
-    writeOutput('<body style="margin:0; padding:0">');
-    for (i=1; i<=ArrayLen(server.a.actions[server.a.action]); i++){
-
-        if (gender eq 1) { //if male lets put preference to darker colors
-            if (listcontainsnocase("dodgerblue,green,gray,black", server.a.actions[server.a.action][i].color)) 
-            {
-                writeOutput('<div style="background-color:#server.a.actions[server.a.action][i].color#; height:400px;"><a href="javascript:forcereward(1);" style="background-color:white;">Click Me</a></div>');
-            }
-            else 
-            {
-                writeOutput('<div style="background-color:#server.a.actions[server.a.action][i].color#; height:400px;"><a href="javascript:forcereward(-1);" style="background-color:white;">Click Me</a></div>');
-            }
-        } else {
-            if (listcontainsnocase("yellow,pink,magenta,violet", server.a.actions[server.a.action][i].color)) 
-            {
-                writeOutput('<div style="background-color:#server.a.actions[server.a.action][i].color#; height:400px;"><a href="javascript:forcereward(1);" style="background-color:white;">Click Me</a></div>');
-            }
-            else 
-            {
-                writeOutput('<div style="background-color:#server.a.actions[server.a.action][i].color#; height:400px;"><a href="javascript:forcereward(-1);" style="background-color:white;">Click Me</a></div>');
-            }
-        }
-    }
-    writeOutput('</body>');
 
 
     writeOutput('<input type="button" onclick="javascript:reseteverything();" style="position:absolute; top: 0; right: 0;" value="RESET EVERYTHING">');
