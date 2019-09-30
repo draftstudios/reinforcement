@@ -1,8 +1,5 @@
 component name="agent" displayname="agent" output="true" { 
     public function init () { 
-        // positional information
-        this.p = 0;
-        this.op = this.p; // old position
         
         this.actions = [
             [
@@ -46,7 +43,7 @@ component name="agent" displayname="agent" output="true" {
         this.action = 0;
         
         this.prevactionix = -1;
-        this.num_states = ArrayLen(this.actions);
+        this.num_states = 1;
     }
   
   public function getNumStates() {
