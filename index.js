@@ -231,6 +231,14 @@ World.prototype = {
       // if(a.p.x>this.W) { a.p.x= 1; }
       // if(a.p.y<0) { a.p.y= this.H -1; };
       // if(a.p.y>this.H) { a.p.y= 1; };
+        
+      // handle boundary conditions.. bounce agent
+        // digestion signal doesn't seem to be working fast enough... plz fix
+      if(a.p.x<1) { a.p.x=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+      if(a.p.x>this.W-1) { a.p.x=this.W-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+      if(a.p.y<1) { a.p.y=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+      if(a.p.y>this.H-1) { a.p.y=this.H-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
+
     }
     
     // tick all items
@@ -240,13 +248,6 @@ World.prototype = {
     }
 
       a.digestion_signal += -0.1; // reward over a tick for playing
-
-      // handle boundary conditions.. bounce agent
-        // digestion signal doesn't seem to be working fast enough... plz fix
-      if(a.p.x<1) { a.p.x=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.x>this.W-1) { a.p.x=this.W-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.y<1) { a.p.y=1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
-      if(a.p.y>this.H-1) { a.p.y=this.H-1; a.v.x=0; a.v.y=0; a.digestion_signal += -5.0; a.crash++; }
 
 
     for(var i=0,n=this.items.length;i<n;i++) {

@@ -112,6 +112,8 @@
         //ctx.stroke();
         var pacman = new Image();
         pacman.src = "assets/Pacman.png"; //UNCOMMENT TO GET SPACESHIP
+        var pacman2 = new Image();
+        pacman2.src = "assets/Pacman2.png"; //UNCOMMENT TO GET SPACESHIP
         
         // draw agents sight
         for(var ei=0,ne=a.eyes.length;ei<ne;ei++) {
@@ -132,8 +134,9 @@
           ctx.lineWidth = 2;
           ctx.stroke();
         }
+        ctx.drawImage(i % 2 ? pacman : pacman2, a.op.x-35, a.op.y-35); 
       }
-        ctx.drawImage(pacman, a.op.x-35, a.op.y-35); 
+
       
       // draw items
 
@@ -309,7 +312,7 @@
 
       w = new World();
       w.agents = [];
-      for(var k = 0; k < 1; k++) {
+      for(var k = 0; k < 2; k++) {
         var a = new Agent();
         env = a;
         a.brain = new RL.DQNAgent(env, spec); // give agent a TD brain
