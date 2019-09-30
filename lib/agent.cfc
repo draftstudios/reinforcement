@@ -19,7 +19,6 @@ component name="agent" displayname="agent" output="true" {
       // outputs on world
       this.action = 0;
       
-      this.prevactionix = -1;
       this.num_states = 1; // set this
   }
   
