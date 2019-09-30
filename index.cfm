@@ -37,7 +37,9 @@ if (!isdefined("server.last_reward_arr")) {
 drawHeader();
 
 // just to start tracking performance
-server.last_reward_arr.append(server.a.last_reward);
+if (isdefined("server.a.last_reward")) {
+    server.last_reward_arr.append(server.a.last_reward);
+}
 
 //writedump(server.a.brain);
 
@@ -45,9 +47,10 @@ server.last_reward_arr.append(server.a.last_reward);
 //server.a.resetreward();
 
     server.a.forward();
-    writeoutput('<div style="width:500; height:500; text-align: center; vertical-align: middle; line-height: 500px; font-size: 3em; display:block; background-color:#server.a.actions[server.a.action]#;">'); 
+    writeoutput('<div style="width:500; height:500; text-align: center; vertical-align: middle; line-height: 250px; font-size: 3em; display:block; background-color:#server.a.actions[server.a.action]#;">'); 
     //writeoutput(server.a.action); 
     writeoutput('<a href="javascript:forcereward(1)">LIKE</a> | <a href="javascript:forcereward(-1)">NO LIKE</a>');
+    writeoutput('<br/><a href="javascript:reseteverything(1)">RESET EVERYTHING</a>');
     writeoutput('</div>');
 
     //server.a.forcereward(+1);

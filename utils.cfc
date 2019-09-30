@@ -7,6 +7,6 @@ component name="utils" displayname="utils" output="true" {
         server.a = new lib.agent();
         server.env = server.a;
         server.a.brain = server.obj.DQNAgent(server.env, server.spec);
-        server.a.last_reward_arr = [];
+        server.last_reward_arr = [];
     }
 }
