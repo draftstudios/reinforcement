@@ -1,6 +1,6 @@
 <cfscript>
 server.spec = {}
-server.spec.update = 'qlearn'; // qlearn | sarsa
+server.spec.update = 'qlearn'; // update algorithm, we only have one for now...
 server.spec.gamma = 0.9; // discount factor, [0, 1)
 server.spec.epsilon = 0.2; // initial epsilon for epsilon-greedy policy, [0, 1)
 server.spec.alpha = 0.005; // value function learning rate
@@ -14,12 +14,6 @@ if (!isdefined("server.obj"))
 {
   server.obj = new lib.cfreinforcerl();    
 }
-
-    // always reset agent for now
-    //server.a = new lib.agent();
-    //server.env = server.a;
-    //server.a.brain = server.obj.DQNAgent(server.env, spec);
-
 if (!isdefined("server.a")) {
   server.a = new lib.agent();
 }
@@ -29,9 +23,10 @@ if (!isdefined("server.env")) {
 if (!isdefined("server.a.brain") or IsSimpleValue(server.a.brain)) {
   server.a.brain = server.obj.DQNAgent(server.env, server.spec);
 }
-//writedump(server.a.brain);
 
-    //server.a.brain.reset();
+//writedump(server.a.brain);
+//server.a.brain.reset();
+
 server.a.resetreward();
 server.a.forward(1);
 //server.a.forcereward(1);
