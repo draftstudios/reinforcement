@@ -52,23 +52,15 @@ component name="agent" displayname="agent" output="true" {
   public function getMaxNumActions() {
     return ArrayLen(this.actions);
   }
-  public function forward(gender) { // 1: male, 2: female
+  public function forward(gender) { // heyyy notice this arg!
     // in forward pass the agent simply behaves in the environment
     // create input to brain
-        //var a = 0;
-        //var b = 0;
-        //var c = 0; 
-        //var d = 0; 
-        
-        //if (this.p eq 0) a = 1.0;
-        //if (this.p eq 1) b = 1.0;
-        //if (this.p eq 2) c = 1.0;
-        //if (this.p eq 3) d = 1.0;
     
-    var input_array = [gender];
+    var input_array = [gender]; // okay we're starting to play with something here, but not really using for this example
 
     if (isdefined("this.brain.act")) this.action = this.brain.act(input_array);
 
+    // yes, you can update digestion_signal here (reward tally for this current action) if you know good/bad from just action space
     //if (this.action eq 1) this.digestion_signal += 1.0;
     //if (this.action eq 2) this.digestion_signal += -1.0;
     //if (this.action eq 3) this.digestion_signal += -1.0;
