@@ -136,6 +136,7 @@ component name="agent" displayname="agent" output="true" {
 
     writeOutput('femalePoints =[];malePoints =[];');
 
+    // tallying every 3 seconds
     writeOutput('setInterval(()=>{');
     writeOutput('let copyArr=[];');
     writeOutput('  for(let i = 0; i < arr.length;i++){');
@@ -145,7 +146,9 @@ component name="agent" displayname="agent" output="true" {
     writeOutput(' }');
     writeOutput('console.log(copyArr);');
     writeOutput('for (var key in rewardPoints) {if (rewardPoints.hasOwnProperty(key)) {for (let i = 0; i < copyArr.length; i++) {if (copyArr[i] === key) {for (let keyy in rewardPoints[copyArr[i]]) {if (rewardPoints[copyArr[i]].hasOwnProperty(keyy)) {if(gender ==2){keyy = ''f'';console.log(''Female Point: ''+ rewardPoints[copyArr[i]][keyy]);femalePoints.push(rewardPoints[copyArr[i]][keyy]);}else{keyy = ''m'';console.log(''Male Point: ''+ rewardPoints[copyArr[i]][keyy]);malePoints.push(rewardPoints[copyArr[i]][keyy]);}}}}}}}');
-    writeOutput('},5000);');
+    writeOutput('},3000);');
+
+    // updating every 5 seconds back to CF
     writeOutput('setInterval(()=>{let totalFemalePoints;let totalMalePoints;if(femalePoints !=[] || femalePoints ==0 || femalePoints ==undefined){totalFemalePoints = femalePoints.reduce((a,b)=>a+b, 0);forcereward(totalFemalePoints);}if(malePoints !=[] || malePoints ==0 || malePoints == undefined){totalMalePoints = malePoints.reduce((a,b)=> a+b, 0);forcereward(totalMalePoints);}console.log(''Female Pointsssss:''+totalFemalePoints);console.log(''Male Pointsssss: ''+ totalMalePoints);femalePoints =[];malePoints =[];},5000);');
     // LOOP THROUGH CLASS NAMES AND FIND REWARD VALUE FOR EACH, ADD THEM TOGETHER, THEN CALL FORCEFORWARD(VAL) ie: javascript:forcereward(-1);
     writeOutput('</script>');
