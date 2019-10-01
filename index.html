@@ -134,7 +134,7 @@
           ctx.lineWidth = 2;
           ctx.stroke();
         }
-        ctx.drawImage(i % 2 ? pacman : pacman2, a.op.x-35, a.op.y-35); 
+        ctx.drawImage(i % 2 ? pacman2 : pacman, a.op.x-35, a.op.y-35); 
       }
 
       
@@ -312,7 +312,7 @@
 
       w = new World();
       w.agents = [];
-      for(var k = 0; k < 2; k++) {
+      for(var k = 0; k < 1; k++) {
         var a = new Agent();
         env = a;
         a.brain = new RL.DQNAgent(env, spec); // give agent a TD brain
